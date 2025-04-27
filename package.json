@@ -10,7 +10,8 @@
     "build": "tsup",
     "start": "pnpm run build && node dist/index.js start",
     "version": "pnpm run build && node dist/index.js version",
-    "prepare": "pnpm run build"
+    "prepare": "pnpm run build",
+    "archive": "git archive --format zip -o ../output.zip HEAD"
   },
   "keywords": [],
   "author": "",
