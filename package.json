@@ -1,6 +1,6 @@
 {
   "name": "uptodoc",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "bin": {
     "uptodoc": "dist/index.js"
@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsup",
     "start": "pnpm run build && node dist/index.js start",
+    "version": "pnpm run build && node dist/index.js version",
     "prepare": "pnpm run build"
   },
   "keywords": [],

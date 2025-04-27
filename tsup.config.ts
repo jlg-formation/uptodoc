@@ -4,11 +4,11 @@ export default defineConfig({
   entry: ["src/index.ts", "src/commands/*.ts"],
   outDir: "dist",
   format: ["esm"],
-  target: "node20", // or node18 depending on your target
+  target: "node18", // or node18 depending on your target
   splitting: false,
   sourcemap: true,
   clean: true,
-  dts: true,
+  dts: false,
   banner: {
     js: "#!/usr/bin/env node",
   },

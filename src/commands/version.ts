@@ -1,3 +1,5 @@
+import { version as packageVersion } from "../../package.json";
+
 export function version() {
-  console.log("📦 Version 1.0.0");
+  console.log(`Version: ${packageVersion}`);
 }
