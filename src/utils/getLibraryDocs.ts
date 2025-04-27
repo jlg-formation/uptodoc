@@ -9,12 +9,12 @@ export const getLibraryDocs = async (library: string) => {
     if (!response.ok) {
       throw new Error(`Error fetching documentation: ${response.statusText}`);
     }
-    const documentationText = await response.json();
+    const documentationText = await response.text();
     return documentationText;
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     return (
-      "No documentation found for this library. For information, error message: " +
+      `No documentation found for this library. For information, when fetching ${url}, error message: ` +
       errorMessage
     );
   }
