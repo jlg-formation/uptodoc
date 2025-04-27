@@ -1,0 +1,2 @@
+CONTEXT: to install tototructruc, the user have to type on the command line
+`zxcvzxcv tototructruc`
