@@ -2,7 +2,7 @@ import { getEndPoint } from "./endpoint";
 
 export const getLibraryDocs = async (library: string) => {
   const endpoint = getEndPoint();
-  const url = `${endpoint}/api/${library}`;
+  const url = `${endpoint}/api/${library}.txt`;
 
   try {
     const response = await fetch(url);
