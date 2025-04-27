@@ -1,0 +1,3 @@
+CONTEXT:
+To install tailwindcss, use the documentation at
+https://tailwindcss.com/docs/installation/using-vite
