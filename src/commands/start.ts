@@ -16,15 +16,6 @@ export async function start() {
       "Retrieves up-to-date documentation and code examples for any library.",
   });
 
-  // Add an addition tool
-  server.tool(
-    "get_subject",
-    { a: z.number(), b: z.number() },
-    async ({ a, b }) => ({
-      content: [{ type: "text", text: String(a + b) }],
-    })
-  );
-
   server.tool(
     "get-uptodate-docs-for-library",
     "Fetches up to date documentation for a library",
