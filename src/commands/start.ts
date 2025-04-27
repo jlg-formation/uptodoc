@@ -1,34 +1,47 @@
-import {
-  McpServer,
-  ResourceTemplate,
-} from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
+import packageJson from "../../package.json";
+import { getEndPoint } from "../utils/endpoint";
+import { getLibraryDocs } from "../utils/getLibraryDocs";
 
 export async function start() {
+  const endpoint = getEndPoint();
+  console.log("endpoint: ", endpoint);
   // Create an MCP server
   const server = new McpServer({
     name: "Demo",
-    version: "1.0.0",
+    version: packageJson.version,
+    description:
+      "Retrieves up-to-date documentation and code examples for any library.",
   });
 
   // Add an addition tool
-  server.tool("add", { a: z.number(), b: z.number() }, async ({ a, b }) => ({
-    content: [{ type: "text", text: String(a + b) }],
-  }));
-
-  // Add a dynamic greeting resource
-  server.resource(
-    "greeting",
-    new ResourceTemplate("greeting://{name}", { list: undefined }),
-    async (uri, { name }) => ({
-      contents: [
-        {
-          uri: uri.href,
-          text: `Hello, ${name}!`,
-        },
-      ],
+  server.tool(
+    "get_subject",
+    { a: z.number(), b: z.number() },
+    async ({ a, b }) => ({
+      content: [{ type: "text", text: String(a + b) }],
     })
+  );
+
+  server.tool(
+    "get-uptodate-docs-for-library",
+    "Fetches up to date documentation for a library",
+    {
+      library: z.string().describe("Library name."),
+    },
+    async ({ library }) => {
+      const documentationText = await getLibraryDocs(library);
+      return {
+        content: [
+          {
+            type: "text",
+            text: documentationText,
+          },
+        ],
+      };
+    }
   );
 
   // Start receiving messages on stdin and sending messages on stdout
